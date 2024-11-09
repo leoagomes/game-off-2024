@@ -12,6 +12,13 @@ if DEVELOPMENT then
   lovebird = require('libs/lovebird')
 end
 
+-- globals
+class = require('libs/hump/class')
+Vector = require('libs/hump/vector')
+Timer = require('libs/hump/timer')
+Gamestate = require('libs/hump/gamestate')
+Signal = require('libs/hump/signal')
+
 function love.load()
 end
 
@@ -19,6 +26,7 @@ function love.update(dt)
   if lovebird then
     lovebird.update()
   end
+  Timer.update(dt)
 end
 
 function love.draw()
@@ -33,7 +41,6 @@ end
 
 function love.keypressed(key)
   print("Key pressed: " .. key)
-  -- love.event.quit(0)
 end
 
 
