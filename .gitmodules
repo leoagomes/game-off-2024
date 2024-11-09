@@ -1,0 +1,3 @@
+[submodule "game/libs/hump"]
+	path = game/libs/hump
+	url = git@github.com:HDictus/hump.git
