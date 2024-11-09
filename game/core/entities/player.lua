@@ -65,7 +65,7 @@ return function(opt)
     _debug_shape = {
       color = { 1, 0, 0, 0.5 },
     },
-    -- camera_tracked = true,
+    camera_tracked = true,
   }
   shape.entity = entity
   return entity

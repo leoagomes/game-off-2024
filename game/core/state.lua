@@ -13,11 +13,14 @@ return class {
     if self._initialized then return end
     self._initialized = true
 
+    self.timer = Timer()
+    self.signal = Signal()
     self.camera = Camera()
+    self.camera:zoomTo(2)
     self.collider = HC.new()
     self.world = tiny.world(
       require('core.systems.animation.update')(),
-      require('core.systems.animation.draw')(),
+      require('core.systems.animation.draw')({ camera = self.camera }),
       require('core.systems.physics.movement')(),
       require('core.systems.physics.forces')(),
       require('core.systems.physics.force')(),

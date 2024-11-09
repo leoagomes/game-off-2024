@@ -20,6 +20,8 @@ Gamestate = require 'libs.hump.gamestate'
 Signal = require 'libs.hump.signal'
 
 function love.load()
+  love.graphics.setDefaultFilter('linear', 'nearest')
+
   Gamestate.registerEvents()
 
   local state = require('core.state')()
