@@ -1,1 +1,1 @@
-return require('game/data/conf/default')
+return require('data/conf/default')
