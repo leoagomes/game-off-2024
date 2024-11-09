@@ -15,17 +15,23 @@ return class {
 
     self.timer = Timer()
     self.signal = Signal()
+    self.collider = HC.new()
     self.camera = Camera()
     self.camera:zoomTo(2)
-    self.collider = HC.new()
     self.world = tiny.world(
-      require('core.systems.animation.update')(),
-      require('core.systems.animation.draw')({ camera = self.camera }),
+      -- handle input
+      require('core.systems.control')(),
+      -- collisions interfere with movement, so run them first
+      require('core.systems.collision.detection')({ collider = self.collider }),
+      -- process physics
       require('core.systems.physics.movement')(),
       require('core.systems.physics.forces')(),
       require('core.systems.physics.force')(),
-      require('core.systems.collision.debug-draw')(),
-      require('core.systems.camera-tracking')({ camera = self.camera })
+      -- update camera and draw systems
+      require('core.systems.camera-tracking')({ camera = self.camera }),
+      require('core.systems.animation.update')(),
+      require('core.systems.animation.draw')({ camera = self.camera }),
+      require('core.systems.collision.debug-draw')()
     )
     self.map = require('core.map')({
       collider = self.collider,

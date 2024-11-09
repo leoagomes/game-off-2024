@@ -38,6 +38,7 @@ end
 
 return function(opt)
   opt = opt or {}
+  local signal = Signal()
   -- animation setup
   local animation = load_animation()
   -- physics properties
@@ -54,6 +55,7 @@ return function(opt)
   local controls = baton.new(opt.controls or require('data.conf.controls'))
   -- return the entity
   local entity = {
+    signal = signal,
     animation = animation,
     position = position,
     controls = controls,

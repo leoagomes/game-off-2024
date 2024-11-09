@@ -10,6 +10,7 @@ if DEBUG then
 end
 if DEVELOPMENT then
   lovebird = require('libs.lovebird')
+  inspect = require('libs.inspect')
 end
 
 -- globals

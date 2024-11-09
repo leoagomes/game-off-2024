@@ -95,6 +95,7 @@ local function generate_solids(collider, data)
                   solid.tags = {
                     solid = true,
                     ground = true,
+                    static = tags.Static or false
                   }
                   table.insert(solids, solid)
                 end
