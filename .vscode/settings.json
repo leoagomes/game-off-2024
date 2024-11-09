@@ -2,5 +2,7 @@
   "Lua.runtime.version": "LuaJIT",
   "Lua.diagnostics.globals": ["love"],
   "Lua.workspace.library": [],
-  "Lua.workspace.checkThirdParty": false
+  "Lua.workspace.checkThirdParty": false,
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
 }
