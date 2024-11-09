@@ -30,6 +30,10 @@ return class {
     self.world:update(dt)
   end,
   draw = function(self)
+    self.camera:attach()
+    self.map:draw()
+    self.camera:detach()
+
     self.world:update(nil, draw_system_filter)
   end,
   joystickadded = function(self, joystick)
