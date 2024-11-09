@@ -8,7 +8,7 @@ return class {
   init = function(self)
     self.map = require('data.worlds.test.init')()
     self.map:load('data/worlds/test')
-    local player_position = Vector(100, 100) -- TODO: load from level
+    local player_position = Vector(240, 160) -- TODO: load from level
     self.collider = HC.new()
     self.camera = Camera(player_position.x, player_position.y)
     self.world = tiny.world(
@@ -17,7 +17,8 @@ return class {
       require('core.systems.physics.movement')(),
       require('core.systems.physics.forces')(),
       require('core.systems.physics.force')(),
-      require('core.systems.collision.debug-draw')()
+      require('core.systems.collision.debug-draw')(),
+      require('core.systems.camera-tracking')({ camera = self.camera })
     )
     local player = require('core.entities.player')({
       position = player_position,
