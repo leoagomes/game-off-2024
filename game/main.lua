@@ -2,7 +2,7 @@
 local lovebird
 DEBUG = arg[2] == 'debug'
 if DEBUG then
-  require('lldebug').start()
+  require('lldebugger').start()
   local error_handler = love.errorhandler
   love.errorhandler = function(msg)
     error(msg, 2)

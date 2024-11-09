@@ -47,7 +47,7 @@ return function(opt)
   -- collision
   local shape = load_shape(position, opt.collider)
   -- controls
-  local controls = baton.new(opt.controls or require('game.data.conf.controls'))
+  local controls = baton.new(opt.controls or require('data.conf.controls'))
   -- return the entity
   local entity = {
     animation = animation,

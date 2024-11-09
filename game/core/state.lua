@@ -6,19 +6,20 @@ local draw_system_filter = tiny.requireAll('_is_draw')
 
 return class {
   init = function(self)
-    self.level = require('game.data.levels.test.init')
+    self.map = require('data.worlds.test.init')()
+    self.map:load('data/worlds/test')
     local player_position = Vector(100, 100) -- TODO: load from level
     self.collider = HC.new()
     self.camera = Camera(player_position.x, player_position.y)
     self.world = tiny.world(
-      require('game.core.systems.animation.update')(),
-      require('game.core.systems.animation.draw')(),
-      require('game.core.systems.physics.movement')(),
-      require('game.core.systems.physics.forces')(),
-      require('game.core.systems.physics.force')(),
-      require('game.core.systems.collision.debug-draw')()
+      require('core.systems.animation.update')(),
+      require('core.systems.animation.draw')(),
+      require('core.systems.physics.movement')(),
+      require('core.systems.physics.forces')(),
+      require('core.systems.physics.force')(),
+      require('core.systems.collision.debug-draw')()
     )
-    local player = require('game.core.entities.player')({
+    local player = require('core.entities.player')({
       position = player_position,
       collider = self.collider,
     })
