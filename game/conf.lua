@@ -1,5 +1,5 @@
 DEVELOPMENT = true
-CONF = require('data/conf/default')
+CONF = require 'data/conf/default'
 
 local conf_audio, conf_window, conf_modules
 
@@ -13,7 +13,7 @@ function love.conf(t)
   t.externalstorage = false
   t.gammacorrect = false
 
-  CONF = require('data/conf')
+  CONF = require 'data/conf'
 
   conf_audio(t.audio)
   conf_window(t.window)
