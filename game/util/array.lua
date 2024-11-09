@@ -14,7 +14,16 @@ local function find(array, fn)
   end
 end
 
+local function to_set(array)
+  local set = {}
+  for _, v in ipairs(array) do
+    set[v] = true
+  end
+  return set
+end
+
 return {
   map = map,
   find = find,
+  to_set = to_set,
 }

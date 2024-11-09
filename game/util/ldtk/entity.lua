@@ -1,6 +1,6 @@
 local array = require 'util.array'
 
-local Field = require 'core.map.field'
+local Field = require 'util.ldtk.field'
 
 return class {
   init = function(self, raw)
@@ -18,6 +18,7 @@ return class {
       raw.__worldX,
       raw.__worldY
     )
+    self.tags = raw.__tags or {}
     self.width = raw.width
     self.height = raw.height
     self.fields = array.map(raw.fieldInstances, function(raw_field)

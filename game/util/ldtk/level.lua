@@ -1,6 +1,6 @@
 local array = require 'util.array'
 
-local Layer = require 'core.map.layer'
+local Layer = require 'util.ldtk.layer'
 
 return class {
   init = function(self, world, raw)

@@ -29,6 +29,10 @@ local function load_shape(position, collider)
   local x, y = position.x + offset.x, position.y + offset.y
   local shape = collider:rectangle(x, y, width, height)
   shape.offset = offset
+  shape.tags = {
+    solid = true,
+    player = true,
+  }
   return shape
 end
 
@@ -61,7 +65,7 @@ return function(opt)
     _debug_shape = {
       color = { 1, 0, 0, 0.5 },
     },
-    camera_tracked = true,
+    -- camera_tracked = true,
   }
   shape.entity = entity
   return entity
