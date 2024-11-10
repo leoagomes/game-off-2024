@@ -19,8 +19,10 @@ return class {
     self.camera = Camera()
     self.camera:zoomTo(2)
     self.world = tiny.world(
-      -- handle input
-      require('core.systems.control')(),
+      -- update input so other systems can rely on it
+      require('core.systems.input.update')(),
+      -- signal input events
+      require('core.systems.input.signaling')({ signal = self.signal }),
       -- collisions interfere with movement, so run them first
       require('core.systems.collision.detection')({ collider = self.collider }),
       -- process physics
@@ -41,7 +43,7 @@ return class {
       position = self.map.data.player_spawn.world:clone(),
       collider = self.collider,
     })
-    self.player.controls.config.joystick = love.joystick.getJoysticks()[1]
+    self.player.input.config.joystick = love.joystick.getJoysticks()[1]
     self.world:add(self.player)
   end,
   update = function(self, dt)

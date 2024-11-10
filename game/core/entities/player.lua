@@ -1,26 +1,7 @@
 local anim8 = require 'libs.anim8'
 local baton = require 'libs.baton'
 
-local function load_animation()
-  local path = 'data/assets/third-party/character/Sprites/PlayerSheet.png'
-  local frame_width, frame_height = 96, 84
-  local default_offset = Vector(-48, -84)
-
-  local sheet = love.graphics.newImage(path)
-  local grid = anim8.newGrid(frame_width, frame_height, sheet:getWidth(), sheet:getHeight())
-  local animations = {
-    idle = anim8.newAnimation(grid('1-7', 1), 0.2),
-  }
-  local offsets = {
-    idle = default_offset,
-  }
-  return {
-    offsets = offsets,
-    sheet = sheet,
-    animations = animations,
-    current = 'idle',
-  }
-end
+local player_assets = require 'data.assets.player'
 
 local function load_shape(position, collider)
   local width, height = 16, 40
@@ -40,7 +21,7 @@ return function(opt)
   opt = opt or {}
   local signal = Signal()
   -- animation setup
-  local animation = load_animation()
+  local animation = player_assets()
   -- physics properties
   local position = opt.position or Vector(0, 0)
   local velocity = Vector(0, 0)
@@ -52,21 +33,27 @@ return function(opt)
   -- collision
   local shape = load_shape(position, opt.collider)
   -- controls
-  local controls = baton.new(opt.controls or require('data.conf.controls'))
+  local input = baton.new(opt.controls or require('data.conf.controls'))
+  -- entity state
+  local state = {
+    name = 'idle',
+    grounded = false,
+    facing_right = true,
+  }
   -- return the entity
   local entity = {
     signal = signal,
     animation = animation,
     position = position,
-    controls = controls,
     velocity = velocity,
+    mass = mass,
     force = force,
     forces = forces,
-    mass = mass,
     shape = shape,
     _debug_shape = {
       color = { 1, 0, 0, 0.5 },
     },
+    input = input,
     camera_tracked = true,
   }
   shape.entity = entity
