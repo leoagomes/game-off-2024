@@ -12,6 +12,16 @@ local grid = anim8.newGrid(
 )
 local animations = {
   idle = anim8.newAnimation(grid('1-7', 1), 0.2),
+  walk = anim8.newAnimation(grid('1-8', 2), 0.1),
+  run_blade_up = anim8.newAnimation(grid('1-8', 3), 0.1),
+  run_blade_down = anim8.newAnimation(grid('1-8', 4), 0.1),
+  sprint = anim8.newAnimation(grid('1-6', 5), 0.1),
+  run_attack = anim8.newAnimation(grid('1-6', 6), 0.1),
+  crouch_idle = anim8.newAnimation(grid('1-6', 7), 0.2),
+  jump_rise = anim8.newAnimation(grid(1, 15), 0.1),
+  jump_mid = anim8.newAnimation(grid(1, 16), 0.1),
+  jump_fall = anim8.newAnimation(grid(1, 17), 0.1),
+  guard = anim8.newAnimation(grid('1-6', 24), 0.1),
 }
 local offsets = {
   idle = default_offset,

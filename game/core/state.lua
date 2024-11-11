@@ -30,10 +30,11 @@ return class {
       require('core.systems.physics.forces')(),
       require('core.systems.physics.force')(),
       -- update camera and draw systems
-      require('core.systems.camera-tracking')({ camera = self.camera }),
+      require('core.systems.camera.track')({ camera = self.camera }),
       require('core.systems.animation.update')(),
       require('core.systems.animation.draw')({ camera = self.camera }),
-      require('core.systems.collision.debug-draw')()
+      require('core.systems.collision.debug-draw')(),
+      require('core.systems.draw')({ camera = self.camera })
     )
     self.map = require('core.map')({
       collider = self.collider,
