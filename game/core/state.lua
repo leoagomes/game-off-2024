@@ -17,7 +17,7 @@ return class {
     self.signal = Signal()
     self.collider = HC.new()
     self.camera = Camera()
-    self.camera:zoomTo(2)
+    self.camera:zoomTo(1)
     self.world = tiny.world(
       -- update input so other systems can rely on it
       require('core.systems.input.update')(),
@@ -57,7 +57,7 @@ return class {
   draw = function(self)
     self.camera:attach()
     self.map:draw()
-    self.map:debug_draw()
+    -- self.map:debug_draw()
     self.camera:detach()
 
     self.world:update(nil, draw_system_filter)
