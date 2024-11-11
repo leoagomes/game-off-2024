@@ -33,10 +33,15 @@ end
 
 return function()
   local sheet = love.graphics.newImage(sheet_path)
-  return {
-    sheet = sheet,
-    animations = _table.transform_values(animations, clone),
-    offsets = _table.transform_values(offsets, clone),
-    current = 'idle',
-  }
+  local data = _table.transform_values(
+    animations,
+    function(animation)
+      return {
+        offset = default_offset:clone(),
+        sheet = sheet,
+        animation = animation:clone(),
+      }
+    end
+  )
+  return data
 end

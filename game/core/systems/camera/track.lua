@@ -10,11 +10,12 @@ return tiny.processingSystem(class {
   process = function(self, entity, dt)
     if entity.camera_tracked then
       local screen_width, screen_height = love.graphics.getDimensions()
-
+      local x1,y1, x2,y2 = entity.shape:bbox()
+      local w, h = x2 - x1, y2 - y1
       self.camera:lockWindow(
         entity.position.x, entity.position.y,
-        CAMERA_MARGIN, screen_width - CAMERA_MARGIN,
-        CAMERA_MARGIN, screen_height - CAMERA_MARGIN
+        CAMERA_MARGIN, screen_width - CAMERA_MARGIN - w,
+        CAMERA_MARGIN + h, screen_height - CAMERA_MARGIN
       )
     end
   end,

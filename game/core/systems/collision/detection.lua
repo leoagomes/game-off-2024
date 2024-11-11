@@ -9,7 +9,15 @@ return tiny.processingSystem(class {
   process = function(self, entity, dt)
     local signal = entity.signal
     for shape, delta in pairs(self.collider:collisions(entity.shape)) do
-      signal:emit('collision', shape.entity, delta, self.collider, dt)
+      local message = {
+        self = entity,
+        shape = shape,
+        entity = shape.entity,
+        delta = delta,
+        collider = self.collider,
+        deltatime = dt,
+      }
+      signal:emit('collision', entity, message)
     end
   end,
 })

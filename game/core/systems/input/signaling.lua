@@ -6,7 +6,7 @@ return tiny.processingSystem(class {
     self.signal = opt.signal
   end,
   process = function(self, entity, dt)
-    local input, signal = entity.input, self.signal
+    local input, signal = entity.input, entity.signal
     if input:pressed('pause') then
       local name = 'input:pause'
       self.signal:emit(name, entity)

@@ -23,18 +23,21 @@ return class {
       require('core.systems.input.update')(),
       -- signal input events
       require('core.systems.input.signaling')({ signal = self.signal }),
-      -- collisions interfere with movement, so run them first
+      -- collisions might interfere with movement, so run them first
       require('core.systems.collision.detection')({ collider = self.collider }),
+      require('core.systems.input.movement')(),
+      require('core.systems.update')(), -- TODO: maybe change order
       -- process physics
-      require('core.systems.physics.movement')(),
       require('core.systems.physics.forces')(),
       require('core.systems.physics.force')(),
-      -- update camera and draw systems
+      require('core.systems.physics.movement')({ collider = self.collider }),
+      -- graphics update systems
       require('core.systems.camera.track')({ camera = self.camera }),
       require('core.systems.animation.update')(),
+      -- draw systems, run separately after all updates
+      -- require('core.systems.draw')({ camera = self.camera }),
       require('core.systems.animation.draw')({ camera = self.camera }),
-      require('core.systems.collision.debug-draw')(),
-      require('core.systems.draw')({ camera = self.camera })
+      require('core.systems.collision.debug-draw')()
     )
     self.map = require('core.map')({
       collider = self.collider,
@@ -46,6 +49,7 @@ return class {
     })
     self.player.input.config.joystick = love.joystick.getJoysticks()[1]
     self.world:add(self.player)
+    self.camera:lookAt(self.player.position.x, self.player.position.y)
   end,
   update = function(self, dt)
     self.world:update(dt)
