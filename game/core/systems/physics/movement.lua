@@ -6,36 +6,24 @@ return tiny.processingSystem(class {
     self.collider = opt.collider
   end,
   process = function(self, entity, dt)
-    local delta = entity.velocity * dt
-    local next_position = entity.position + delta
-    entity.position = next_position
-    -- if the entity has a shape, move it
+    local direction = entity.velocity:normalized()
+    local movement_delta = entity.velocity * dt
+    local next_position = entity.position + movement_delta
     if entity.shape then
       local shape = entity.shape
-      shape:move(delta.x, delta.y)
-      -- if the entity is solid, we want to slide it
-      if shape.tags.solid then
-        local resolve_x, resolve_y = 0, 0
-        for other_shape, collision_delta in pairs(self.collider:collisions(shape)) do
-          if other_shape.tags.solid then
-            resolve_x = resolve_x + collision_delta.x
-            resolve_y = resolve_y + collision_delta.y
-          end
-        end
-        entity.position.x = entity.position.x + resolve_x
-        entity.position.y = entity.position.y + resolve_y
-        shape:move(resolve_x, resolve_y)
-        -- and notify of the collisions that occurred
-        if entity.signal then
-          entity.signal:emit('physics:slide', {
-            self = entity,
-            shape = shape,
-            delta = Vector(resolve_x, resolve_y),
-            collider = self.collider,
-            deltatime = dt,
-          })
-        end
+      if entity.shape.tags.solid then
+        local len2 = entity.velocity:len2()
+        local len = entity.velocity:len()
+        local perp = direction:perpendicular()
+        local max_x, max_y = shape:support(perp.x, perp.y)
+        perp = -perp
+        local min_x, min_y = shape:support(perp.x, perp.y)
+
+
+
       end
+      entity.shape:moveTo(next_position.x, next_position.y)
     end
+    entity.position = next_position
   end,
 })
