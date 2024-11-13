@@ -1,6 +1,6 @@
 [submodule "game/libs/hump"]
 	path = game/libs/hump
-	url = git@github.com:HDictus/hump.git
+	url = git@github.com:leoagomes/hump.git
 [submodule "game/libs/HC"]
 	path = game/libs/HC
 	url = git@github.com:vrld/HC.git
